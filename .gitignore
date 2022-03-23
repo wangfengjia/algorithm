@@ -1,2 +1,5 @@
-/algorithm.iml
-/.idea/
+/*/target
+/*/*.iml
+*.iml
+.idea
+

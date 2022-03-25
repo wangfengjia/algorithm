@@ -10,7 +10,7 @@ public class LengthOfLIS {
 
     /**
      * 动态规划版本
-     *      1. 状态定义:dp[i]表示以第i个位置结尾的最长递增子序列的长度。nums[i]是必须做选择的
+     *      1. 状态定义:dp[i]表示以第i个元素结尾的最长上升子序列的长度。nums[i]是必须做选择的
      *      2. 状态转移方程:dp[i] = max(dp[j]) + 1，且nums[i] > nums[j]。dp[j]表示dp[0....i-1]的最长递增子序列的长度
      *      3. 边界条件: dp[0] = 1;
      * @param nums

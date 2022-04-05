@@ -1,6 +1,7 @@
 package com.leetcode.www.hard.stack;
 
 import java.time.chrono.IsoChronology;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -63,12 +64,40 @@ public class LargestRectangleArea {
         return ans;
     }
 
+    // 在上面一个方法的确定一个柱子的左侧边界时，需要把单调栈里面高度大于等于当前枚举到的柱子的下标出栈，而此时，当前枚举到的元素就是出栈元素的右边界
+    public int solutionV2(int[] heights){
+
+        int n = heights.length;
+        int[] left = new int[n];
+        int[] right = new int[n];
+        //右边界哨兵
+        Arrays.fill(right, n);
+        Deque<Integer> stack = new LinkedList<>();
+
+        for (int i = 0; i < n; i++){
+            if (!stack.isEmpty() && heights[stack.peek()] >= heights[i]){
+                right[stack.peek()] = i;
+                stack.pop();
+            }
+            left[i] = stack.isEmpty() ? -1 : stack.peek();
+            stack.push(i);
+        }
+
+        int ans = 0;
+        for (int i = 0; i < n; i++){
+            int height = heights[i];
+            int width = right[i] - left[i] - 1;
+            ans = Math.max(ans, height * width);
+        }
+
+        return ans;
+    }
 
     public static void main(String[] args) {
 
         LargestRectangleArea rectangleArea = new LargestRectangleArea();
         int[] heights = new int[]{2,4};
-        int ans = rectangleArea.solution(heights);
+        int ans = rectangleArea.solutionV2(heights);
         System.out.println(ans);
     }
 }

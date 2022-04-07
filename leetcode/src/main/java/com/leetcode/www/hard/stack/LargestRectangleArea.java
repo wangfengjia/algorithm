@@ -1,6 +1,7 @@
 package com.leetcode.www.hard.stack;
 
 import java.time.chrono.IsoChronology;
+import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
@@ -32,10 +33,10 @@ public class LargestRectangleArea {
         int[] left = new int[n];
         int[] right = new int[n];
 
-        Deque<Integer> stack = new LinkedList<>();
+        Deque<Integer> stack = new ArrayDeque<>();
         //确定每根柱子左侧最近的小于其高度的柱子
         for (int i = 0; i < n; i++){
-            if (!stack.isEmpty() && heights[stack.peek()] >= heights[i]){
+            while (!stack.isEmpty() && heights[stack.peek()] >= heights[i]){
                 stack.pop();
             }
             left[i] = stack.isEmpty() ? -1 : stack.peek();
@@ -45,7 +46,7 @@ public class LargestRectangleArea {
         stack.clear();
         //确定每根柱子右侧最近的小于其高度的柱子
         for (int i = n - 1; i >= 0; --i){
-            if (!stack.isEmpty() && heights[stack.peek()] >= heights[i]){
+            while (!stack.isEmpty() && heights[stack.peek()] >= heights[i]){
                 stack.pop();
             }
             right[i] = stack.isEmpty() ? n : stack.peek();
@@ -72,10 +73,10 @@ public class LargestRectangleArea {
         int[] right = new int[n];
         //右边界哨兵
         Arrays.fill(right, n);
-        Deque<Integer> stack = new LinkedList<>();
+        Deque<Integer> stack = new ArrayDeque<>();
 
         for (int i = 0; i < n; i++){
-            if (!stack.isEmpty() && heights[stack.peek()] >= heights[i]){
+            while (!stack.isEmpty() && heights[stack.peek()] >= heights[i]){
                 right[stack.peek()] = i;
                 stack.pop();
             }

@@ -20,6 +20,9 @@ public class WordBreak {
      *         由dp[j]得知，然后再判断s[j..i-1]是否合法即可，
      *              dp[i] = dp[j] && check(s[j..i-1])
      *      3. 边界条件:dp[0] = true
+     *      4. 复杂度分析
+     *          时间复杂度:O(n^2),n为字符串的长度，一共有O(n)个状态需要计算，每次计算需要枚举O(n)个分割点，所以时间复杂度为O(n^2)
+     *          空间复杂度:O(n),n为字符串的长度，需要O(n)的空间存放dp值以及哈希表也是需要O(n)的空间复杂度，所以总的空间复杂度为O(n)
      * @param s
      * @param words
      * @return

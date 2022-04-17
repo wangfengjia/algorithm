@@ -32,6 +32,7 @@ public class FindMinInRotationArray {
         // 当low==high时，这时二分查找的区间长度为1，则可以结束二分查找了，找到了最小值
         while (low < high){
             int pivot = low + (high - low) / 2;
+//            int pivot = (low + high) / 2;
             if (nums[pivot] < nums[high]){
                 high = pivot;
             }else {
@@ -40,5 +41,14 @@ public class FindMinInRotationArray {
         }
 
         return nums[low];
+    }
+
+    public static void main(String[] args) {
+
+
+        FindMinInRotationArray rotationArray = new FindMinInRotationArray();
+        int[] nums = {3,4,5,1,2};
+        int ans = rotationArray.solution(nums);
+        System.out.println(ans);
     }
 }

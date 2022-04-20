@@ -26,7 +26,7 @@ public class KthSmallest {
 
     private void dfs(TreeNode root, int k){
 
-        if (root == null){
+        if (root == null || ans != -1){
             return;
         }
         dfs(root.left, k);

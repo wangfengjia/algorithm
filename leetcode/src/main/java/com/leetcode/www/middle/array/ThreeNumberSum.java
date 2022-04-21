@@ -63,13 +63,62 @@ public class ThreeNumberSum {
         return ans;
     }
 
+    public List<List<Integer>> solutionV2(int[] nums){
+
+        List<List<Integer>> ans = new ArrayList<>();
+        int n = nums.length;
+
+        Arrays.sort(nums);
+        for (int i = 0; i < n; i++){
+            //在升序数组中，第一个数就大于0，所以不存在三数之和等于0
+            if (nums[i] > 0){
+                break;
+            }
+            //排除重复元素
+            if (i > 0 && nums[i] == nums[i-1]){
+                continue;
+            }
+
+            int target = -nums[i];
+            int left = i + 1;
+            int right = n - 1;
+
+            while (left < right){
+                int sum = nums[left] + nums[right];
+                if (sum == target){
+                    List<Integer> cur = new ArrayList<>();
+                    cur.add(nums[i]);
+                    cur.add(nums[left]);
+                    cur.add(nums[right]);
+                    ans.add(cur);
+
+                    ++left;
+                    --right;
+                    //将left，right指针移动到下一个不相等的元素
+                    while (left < right && nums[left] == nums[left - 1]){
+                        ++left;
+                    }
+                    while (right > left && nums[right] == nums[right + 1]){
+                        --right;
+                    }
+                }else if (sum < target){
+                    ++left;
+                }else {
+                    --right;
+                }
+            }
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
 
         int[] nums = new int[]{-1,0,1,2,-1,4};
         ThreeNumberSum threeNumberSum = new ThreeNumberSum();
         List<List<Integer>> solution = threeNumberSum.solution(nums);
-        for (List<Integer> arr : solution){
-            System.out.println(Arrays.toString(arr.toArray()));;
-        }
+        System.out.println(solution);
+        List<List<Integer>> ans = threeNumberSum.solutionV2(nums);
+        System.out.println(ans);
     }
 }

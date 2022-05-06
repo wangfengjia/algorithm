@@ -7,7 +7,7 @@ public class MaxSubArray {
 
 
     /**
-     * 动态规划版，状态转移方程:f(i) = max((f(i-1) + nums[i]), nums[i]),f(i)表示以第i个数结尾的连续子数组最大号
+     * 动态规划版，状态转移方程:f(i) = max((f(i-1) + nums[i]), nums[i]),f(i)表示以第i个元素结尾的连续子数组最大和
      * @param arr
      * @return
      */

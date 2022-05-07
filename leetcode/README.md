@@ -57,3 +57,6 @@
 ### 58th day
 1. leetcode-523:连续的子数组和,使用前缀和和哈希表,当pre[i]-pre[j]为k的倍数时，pre[i]和pre[j]除以k的余数是相同的,因此只需要计算每个前缀和除以k的余数就可以，然后使用哈希表来记录每个余数第一次出现的下标,然后遍历数组，对于每个元素i求得前缀和pre[i],再用pre[i] % 6求得余数,最后再去哈希表查找有没有相同余数的前缀和，当存储并且子数组长度大于等于2就返回true，其他返回false
 2. leetcode-1208:尽可能使字符串相等,假定字符串origin和target的长度均为n，对于长度0<=i<=n,将origin[i]转变为target[i]的开销为abs(origin[i]-target[i]),因此可以创建一个长度为n的数组diff,其中diff[i]=abs(origin[i]-target[i])。这个问题转化为了计算数组diff的元素和不超过maxCost的最长子数组的长度,由于diff的每个元素都是非负的,因此可以使用滑动窗口的方法得到元素和不超过maxCost的最长子数组的长度
+### 59th day
+1. leetcode-713:乘积小于 K 的子数组,使用滑动窗口的方法来解决:使用left和right两个指针，初始值都是指向数组的第一个元素，同时使用prod来记录窗口内元素的乘积。right指针向右边移动，当prod >= k时，就移动left指针，直到prod<k,此时乘积小于k的子数组的数目为right-left+1
+2. leetcode-316:去除重复字母,使用贪心+单调栈来实现

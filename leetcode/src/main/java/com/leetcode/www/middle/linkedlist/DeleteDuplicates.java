@@ -1,7 +1,7 @@
 package com.leetcode.www.middle.linkedlist;
 
 /**
- * leetcode82-删除排序链表中的重复元素 II
+ * leetcode-82:删除排序链表中的重复元素 II
  * 给定一个已排序的链表的头 head ， 删除原始链表中所有重复数字的节点，只留下不同的数字 。返回 已排序的链表 。
  */
 public class DeleteDuplicates {

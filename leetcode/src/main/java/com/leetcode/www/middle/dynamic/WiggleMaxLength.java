@@ -1,4 +1,4 @@
-package com.leetcode.www.middle.array;
+package com.leetcode.www.middle.dynamic;
 
 /**
  * leetcode-376:摆动序列
@@ -26,6 +26,9 @@ public class WiggleMaxLength {
      *              1. 当nums[i] >= nums[i-1],down[i] = down[i-1]
      *              2. nums[i] < nums[i-1],down[i] = max(down[i-1], up[i-1]+1)
      *      3. 边界条件:up[0]=down[0]=1
+     * 复杂度分析
+     *  时间复杂度:O(N),N表示数组的长度，只需要遍历数组一次
+     *  空间复杂度:O(N),N表示数组的长度，状态数组所使用的空间
      * @param nums
      * @return
      */

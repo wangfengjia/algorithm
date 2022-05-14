@@ -16,7 +16,7 @@ public class FindTargetSumWays {
      *      1. 状态定义:dp[i][j]表示在数组nums前i个元素中选择若干个元素，使这些元素之和等于j的方案数
      *      2. 状态转移方程:
      *          1. 当不选择元素i时，dp[i][j] = dp[i-1][j];
-     *          2. 当选择元素i时，dp[i][j] = dp[i-1][j-nums[i]]
+     *          2. 当nums[i] <= target时，可以选择nums[i]，此时dp[i][j] = dp[i-1][j-nums[i]]
      *          总结:当元素i不可选时，dp[i][j] = dp[i-1][j];当元素i可选时:dp[i][j] = dp[i-1][j] + dp[i-1][j-nums[i]]
      *       3.边界条件:dp[0][0] = 1
      *
@@ -38,24 +38,22 @@ public class FindTargetSumWays {
 
         int n = nums.length;
         int neg = diff / 2;
-        int[][] dp = new int[n][neg + 1];
+        int[][] dp = new int[n+1][neg + 1];
         dp[0][0] = 1;
-        if (nums[0] <= neg){
-            dp[0][nums[0]] = 1;
-        }
 
-        for (int i = 1; i < n; i++){
-            //不选中
+        for (int i = 1; i <= n; i++){
             for (int j = 0; j <= neg; j++){
+                //不选中
                 dp[i][j] = dp[i-1][j];
+                //当nums[i]可选并选中
+                if (nums[i-1] <= j){
+                    dp[i][j] += dp[i-1][j - nums[i-1]];
+                }
             }
-            //选中，达到dp[i][j+nums]这个状态的方案数是由上一步不选中操作后的方案数再加上这这一步做出选中决策后的方案数之和
-            for (int j = 0; j <= (neg - nums[i]); j++){
-                dp[i][j + nums[i]] += dp[i-1][j];
-            }
+
         }
 
-        return dp[n-1][neg];
+        return dp[n][neg];
     }
 
     public static void main(String[] args) {

@@ -1,9 +1,9 @@
 package com.leetcode.www.middle.tree;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
+ * leetcode-106:从中序与后序遍历序列构造二叉树
  * 根据中序遍历和后序遍历的结果重构二叉树，思路类似于根据前序遍历和中序遍历构造二叉树，
  * 区别是
  *  1.遍历根节点是从后序遍历结果的最后一个元素往前遍历(后面的元素是高度更高的子树的根节点)
@@ -64,5 +64,32 @@ public class ConstructFromInPost {
             this.left = left;
             this.right = right;
         }
+    }
+
+    public static void main(String[] args) {
+
+        ConstructFromInPost constructFromInPost = new ConstructFromInPost();
+        int[] inorder = {9,3,15,20,7};
+        int[] postorder = {9,15,7,20,3};
+        TreeNode root = constructFromInPost.solution(inorder, postorder);
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        List<Integer> ansList = new ArrayList<>();
+        while (!queue.isEmpty()){
+            int size = queue.size();
+            for (int i = 0; i < size; i++){
+                TreeNode node = queue.poll();
+                ansList.add(node.val);
+                if (node.left != null){
+                    queue.add(node.left);
+                }
+                if (node.right != null){
+                    queue.add(node.right);
+                }
+            }
+        }
+
+        System.out.println(ansList);
     }
 }

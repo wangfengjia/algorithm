@@ -1,10 +1,9 @@
 package com.leetcode.www.middle.tree;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
- * 根据前序遍历和中序遍历的结果重构二叉树，
+ * leetcode-105:根据前序遍历和中序遍历的结果重构二叉树，
  * 思路:
  * 一棵树的前序遍历结果是[根节点，左子树前序遍历结果,右子树前序遍历结果]，中序遍历结果是[左子树中序遍历结果，根节点，右子树中序遍历结果]，这样就可以在中序遍历结果中
  * 查找根节点的位置，然后根据根节点的位置得到左子树的节点和右子树的节点。因此，从上往下构造树，遍历前序遍历结果数组，每个元素作为根节点(根据前序遍历的特点，
@@ -57,5 +56,32 @@ public class ConstructFromPreIn {
             this.left = left;
             this.right = right;
         }
+    }
+
+    public static void main(String[] args) {
+
+        ConstructFromPreIn construct = new ConstructFromPreIn();
+        int[] preorder = {3,9,20,15,7};
+        int[] inorder = {9,3,15,20,7};
+        TreeNode root = construct.solution(preorder, inorder);
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        List<Integer> ansList = new ArrayList<>();
+        while (!queue.isEmpty()){
+            int size = queue.size();
+            for (int i = 0; i < size; i++){
+                TreeNode node = queue.poll();
+                ansList.add(node.val);
+                if (node.left != null){
+                    queue.add(node.left);
+                }
+                if (node.right != null){
+                    queue.add(node.right);
+                }
+            }
+        }
+
+        System.out.println(ansList);
     }
 }

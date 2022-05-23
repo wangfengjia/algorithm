@@ -15,7 +15,7 @@ public class IntegerReplacement {
     private Map<Integer, Integer> map = new HashMap<>();
 
     /**
-     * 深度优先搜索(BFS),为防止重复处理某些数，使用哈希表进行记忆化处理
+     * 深度优先搜索(BFS),为防止重复处理某些数(比如，计算f(3)时会计算f(4)和f(2),而计算f(4)时又会计算f(2))，使用哈希表进行记忆化处理
      * 复杂度分析
      *  时间复杂度:O(log^n)
      *  空间复杂度:O(log^n),递归调用所需要的栈空间为O(log^n)
@@ -49,7 +49,7 @@ public class IntegerReplacement {
     public static void main(String[] args) {
 
         IntegerReplacement replacement = new IntegerReplacement();
-        int n = 8;
+        int n = 7;
         int ans = replacement.solution(n);
         System.out.println(ans);
     }

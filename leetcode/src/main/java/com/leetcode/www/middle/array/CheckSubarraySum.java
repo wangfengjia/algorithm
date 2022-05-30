@@ -58,7 +58,7 @@ public class CheckSubarraySum {
         }
 
         Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < n; i++){
+        for (int i = 0; i <= n; i++){
             int mod = preSum[i] % k;
             if (map.containsKey(mod)){
                 Integer preIndex = map.get(mod);
@@ -77,9 +77,9 @@ public class CheckSubarraySum {
 
 
         CheckSubarraySum checkSubarraySum = new CheckSubarraySum();
-        int[] nums = {23,2,4,6,7};
+        int[] nums = {23,2,6,7};
         int k = 6;
-        boolean ans = checkSubarraySum.solution(nums, k);
+        boolean ans = checkSubarraySum.solutionV2(nums, k);
         System.out.println(ans);
     }
 }

@@ -33,15 +33,40 @@ public class CheckSubarraySum {
 
         Map<Integer, Integer> map = new HashMap<>();
         map.put(0, -1);
-        int pre = 0;
+        int remainder = 0;
         for (int i = 0; i < n; i++){
-            pre += nums[i];
-            int remainder = pre % k;
+            remainder = (remainder + nums[i]) % k;
             if (map.containsKey(remainder)){
                 Integer preIndex = map.get(remainder);
                 if (i - preIndex >= 2){
                     return true;
                 }
+            }else {
+                map.put(remainder, i);
+            }
+        }
+
+        return false;
+    }
+
+    public boolean solutionV2(int[] nums, int k){
+
+        int n = nums.length;
+        int[] preSum = new int[n + 1];
+        for (int i = 1; i <= n; i++){
+            preSum[i] = preSum[i-1] + nums[i-1];
+        }
+
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < n; i++){
+            int mod = preSum[i] % k;
+            if (map.containsKey(mod)){
+                Integer preIndex = map.get(mod);
+                if (i - preIndex >= 2){
+                    return true;
+                }
+            }else {
+                map.put(mod, i);
             }
         }
 
@@ -52,7 +77,7 @@ public class CheckSubarraySum {
 
 
         CheckSubarraySum checkSubarraySum = new CheckSubarraySum();
-        int[] nums = {23,2,6,7};
+        int[] nums = {23,2,4,6,7};
         int k = 6;
         boolean ans = checkSubarraySum.solution(nums, k);
         System.out.println(ans);

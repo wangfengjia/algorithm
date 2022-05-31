@@ -77,7 +77,7 @@ public class CheckSubarraySum {
 
 
         CheckSubarraySum checkSubarraySum = new CheckSubarraySum();
-        int[] nums = {23,2,6,7};
+        int[] nums = {23,2,4,6,7};
         int k = 6;
         boolean ans = checkSubarraySum.solutionV2(nums, k);
         System.out.println(ans);

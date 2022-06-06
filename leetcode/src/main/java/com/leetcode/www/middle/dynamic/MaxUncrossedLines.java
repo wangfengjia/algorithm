@@ -17,7 +17,7 @@ public class MaxUncrossedLines {
      * nums1和nums2的公共子序列。要计算k的最大值，就是需要计算两个数组的最长公共子序列，转化为了第leetcode-1143题，是一个二维动态规划问题
      *
      * 动态规划
-     *      状态定义:dp[i][j]表示nums1[0:i]和nums2[0:j]。nums1[0:i]表示数组nums1的长度为i的前缀，nums2[0:j]表示数组nums2的长度为j的前缀
+     *      状态定义:dp[i][j]表示nums1[0:i]和nums2[0:j]的最长公共子序列的长度。nums1[0:i]表示数组nums1的长度为i的前缀，nums2[0:j]表示数组nums2的长度为j的前缀
      *      状态转移方程:dp[i][j]可以由dp[i-1][j-1],dp[i-1][j],dp[i][j-1]三个状态转移而来
      *          1. 当nums1[i-1] == nums2[j-1]时,dp[i][j] = dp[i-1][j-1] + 1
      *          2. 当nums1[i-1] != nums2[j-1]时，dp[i][j] = max(dp[i][j-1],dp[i-1][j])

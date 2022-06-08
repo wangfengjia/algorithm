@@ -1,5 +1,8 @@
 package com.leetcode.www.middle.matrix;
 
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
 /**
  * leetcode-378:有序矩阵中第 K 小的元素
  * 给你一个n x n矩阵matrix ，其中每行和每列元素均按升序排序，找到矩阵中第 k 小的元素。
@@ -61,6 +64,38 @@ public class KthSmallest {
         return nums >= k;
     }
 
+    /**
+     * 归并排序
+     * 由于每一行是一个有序数组，这个问题就可以转化为从n个有序数组中找第k大的数，可以利用归并排序，归并到第k个数为止。本题是n个有序数组归并，需要小根堆维护，以
+     * 优化时间复杂度
+     * @param matrix
+     * @param k
+     * @return
+     */
+    public int solutionV2(int[][] matrix, int k){
+
+        PriorityQueue<int[]> queue = new PriorityQueue<>(new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o1[0] - o2[0];
+            }
+        });
+
+        int n = matrix.length;
+        for (int i = 0; i < n; i++){
+            queue.offer(new int[]{matrix[i][0], i, 0});
+        }
+
+        for (int i = 0; i < k-1; i++){
+            int[] cell = queue.poll();
+            if (cell[2] != n - 1){
+                queue.offer(new int[]{matrix[cell[1]][cell[2] + 1], cell[1], cell[2] + 1});
+            }
+        }
+
+        return queue.poll()[0];
+    }
+
     public static void main(String[] args) {
 
         KthSmallest kthSmallest = new KthSmallest();
@@ -72,5 +107,8 @@ public class KthSmallest {
         int k = 8;
         int ans = kthSmallest.solution(matrix, k);
         System.out.println(ans);
+
+        int ans2 = kthSmallest.solutionV2(matrix, k);
+        System.out.println(ans2);
     }
 }
